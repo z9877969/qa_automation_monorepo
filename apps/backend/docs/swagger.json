@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:5000/api"
+      "url": "https://tasteorama.onrender.com/api"
     }
   ],
   "tags": [
@@ -300,11 +300,7 @@
         "summary": "Get list of recipes",
         "operationId": "getRecipes",
         "description": "Get list of recipes with this endpoint",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
+        "security": [],
         "parameters": [
           {
             "in": "query",
