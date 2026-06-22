@@ -78,18 +78,24 @@ export const getAllRecipes = async ({ page = 1, perPage = 12, filter = {} }) => 
     params,
   );
 
-  const [rows] = await pool.query(
-    `${RECIPE_WITH_INGREDIENTS_SQL}
-     ${where}
-     ORDER BY r.created_at DESC
-     LIMIT ? OFFSET ?`,
+  const [idRows] = await pool.query(
+    `SELECT r.id FROM recipes r ${where} ORDER BY r.created_at DESC LIMIT ? OFFSET ?`,
     [...params, perPage, offset],
   );
 
-  const data = groupRecipeRows(rows);
+  const ids = idRows.map((r) => r.id);
   const paginationData = calculatePaginationData(total, page, perPage);
 
-  return { data, ...paginationData };
+  if (!ids.length) return { data: [], ...paginationData };
+
+  const [rows] = await pool.query(
+    `${RECIPE_WITH_INGREDIENTS_SQL}
+     WHERE r.id IN (${ids.map(() => '?').join(',')})
+     ORDER BY r.created_at DESC`,
+    ids,
+  );
+
+  return { data: groupRecipeRows(rows), ...paginationData };
 };
 
 export const getOwnRecipes = async ({ page = 1, perPage = 12, owner }) => {
@@ -101,18 +107,24 @@ export const getOwnRecipes = async ({ page = 1, perPage = 12, owner }) => {
     [owner],
   );
 
-  const [rows] = await pool.query(
-    `${RECIPE_WITH_INGREDIENTS_SQL}
-     WHERE r.owner_id = ?
-     ORDER BY r.created_at DESC
-     LIMIT ? OFFSET ?`,
+  const [idRows] = await pool.query(
+    'SELECT id FROM recipes WHERE owner_id = ? ORDER BY created_at DESC LIMIT ? OFFSET ?',
     [owner, perPage, offset],
   );
 
-  const data = groupRecipeRows(rows);
+  const ids = idRows.map((r) => r.id);
   const paginationData = calculatePaginationData(total, page, perPage);
 
-  return { data, ...paginationData };
+  if (!ids.length) return { data: [], ...paginationData };
+
+  const [rows] = await pool.query(
+    `${RECIPE_WITH_INGREDIENTS_SQL}
+     WHERE r.id IN (${ids.map(() => '?').join(',')})
+     ORDER BY r.created_at DESC`,
+    ids,
+  );
+
+  return { data: groupRecipeRows(rows), ...paginationData };
 };
 
 export const getRecipeById = async (recipeId) => {
@@ -207,17 +219,25 @@ export const getFavoriteRecipes = async ({ page = 1, perPage = 12, userId }) => 
     [userId],
   );
 
-  const [rows] = await pool.query(
-    `${RECIPE_WITH_INGREDIENTS_SQL}
+  const [idRows] = await pool.query(
+    `SELECT r.id FROM recipes r
      JOIN user_favorites uf ON uf.recipe_id = r.id
      WHERE uf.user_id = ?
-     ORDER BY r.created_at DESC
-     LIMIT ? OFFSET ?`,
+     ORDER BY r.created_at DESC LIMIT ? OFFSET ?`,
     [userId, perPage, offset],
   );
 
-  const data = groupRecipeRows(rows);
+  const ids = idRows.map((r) => r.id);
   const paginationData = calculatePaginationData(total, page, perPage);
 
-  return { data, ...paginationData };
+  if (!ids.length) return { data: [], ...paginationData };
+
+  const [rows] = await pool.query(
+    `${RECIPE_WITH_INGREDIENTS_SQL}
+     WHERE r.id IN (${ids.map(() => '?').join(',')})
+     ORDER BY r.created_at DESC`,
+    ids,
+  );
+
+  return { data: groupRecipeRows(rows), ...paginationData };
 };
