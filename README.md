@@ -186,11 +186,15 @@ MYSQL_DB=headliner_db
 
 # Backend
 PORT=5000
+MYSQL_HOST=mysql
+MYSQL_PORT=3306
 APP_DOMAIN=http://localhost:5000
 
 # Frontend
 VITE_API_URL=http://localhost:5000
 ```
+
+> `MYSQL_HOST` та `MYSQL_PORT` у Docker Compose вже встановлені автоматично (`mysql:3306`). Ці змінні потрібні лише при запуску бекенду поза Docker.
 
 ---
 
