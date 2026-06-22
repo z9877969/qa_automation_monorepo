@@ -20,8 +20,9 @@ export const setupServer = () => {
 
   app.use(
     pino({
-      transport: {
-        target: 'pino-pretty',
+      serializers: {
+        req: (req) => ({ method: req.method, url: req.url }),
+        res: (res) => ({ statusCode: res.statusCode }),
       },
     }),
   );
