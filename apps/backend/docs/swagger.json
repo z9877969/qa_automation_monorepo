@@ -300,11 +300,7 @@
         "summary": "Get list of recipes",
         "operationId": "getRecipes",
         "description": "Get list of recipes with this endpoint",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
+        "security": [],
         "parameters": [
           {
             "in": "query",
