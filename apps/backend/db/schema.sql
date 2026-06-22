@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS categories (
 CREATE TABLE IF NOT EXISTS ingredients (
   id   VARCHAR(36)  NOT NULL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  desc TEXT         NOT NULL,
+  `desc` TEXT       NOT NULL,
   img  VARCHAR(500) NOT NULL
 );
 
