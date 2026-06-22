@@ -98,7 +98,7 @@ docker compose up --build
 | Застосунок (Frontend) | http://localhost:5173 |
 | API (Backend) | http://localhost:5000 |
 | Swagger документація | http://localhost:5000/api-docs |
-| MySQL | localhost:3306 |
+| MySQL | localhost:3307 |
 
 ---
 
