@@ -11,6 +11,5 @@ apps/backend/src/temp/*
 apps/backend/src/upload/*
 *.log
 .DS_Store
-db_json/
 CLAUDE.md
 install-docker.sh
