@@ -8,7 +8,7 @@ const RECIPE_WITH_INGREDIENTS_SQL = `
     r.instructions, r.description, r.thumb, r.time,
     r.created_at, r.updated_at,
     ri.ingredient_id, ri.measure,
-    i.name AS ingredient_name, i.desc AS ingredient_desc, i.img AS ingredient_img
+    i.name AS ingredient_name, i.`desc` AS ingredient_desc, i.img AS ingredient_img
   FROM recipes r
   LEFT JOIN recipe_ingredients ri ON ri.recipe_id = r.id
   LEFT JOIN ingredients i ON i.id = ri.ingredient_id
