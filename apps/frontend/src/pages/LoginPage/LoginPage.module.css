@@ -1,0 +1,244 @@
+body {
+  background: #fbfcf8 !important;
+}
+
+.loginBg {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginContainer {
+  border-radius: 32px;
+  padding: 32px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 320px;
+  max-width: 400px;
+  width: 100%;
+  min-height: 340px;
+  gap: 20px;
+}
+
+.title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #18120c;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.label {
+  font-size: 1rem;
+  color: #18120c;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #e0d9c7;
+  background: #fff;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  outline: none;
+  transition: border 0.2s;
+}
+.input:focus {
+  border: 1.5px solid #9b6c43;
+}
+
+.inputError {
+  border: 1.5px solid #d32f2f !important;
+  background: #fff0f0;
+}
+
+.passwordWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.showPasswordBtn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #a68a64;
+  padding: 0;
+}
+
+.loginBtn {
+  width: 100%;
+  background: #9b6c43;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.loginBtn:hover {
+  background: #8b6f4e;
+}
+
+.registerText {
+  font-size: 1rem;
+  color: #18120c;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.registerLink {
+  color: #18120c;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.registerLink:hover {
+  color: #a68a64;
+}
+
+.error {
+  color: #d32f2f;
+  font-size: 0.92rem;
+  text-align: left;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Мобільна версія */
+@media (max-width: 767px) {
+  .loginBg {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+  }
+  .loginContainer {
+    min-width: 320px;
+    max-width: 362px;
+    min-height: 399px;
+    height: auto;
+    box-sizing: border-box;
+    padding: 32px;
+    border-radius: 32px;
+    margin: 0 auto;
+    background: #faf3e0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .form {
+    gap: 12px;
+  }
+  .input {
+    padding: 10px 10px;
+    border-radius: 10px;
+    font-size: 1rem;
+  }
+  .loginBtn {
+    font-size: 1rem;
+    padding: 10px 0;
+    border-radius: 8px;
+  }
+  .title {
+    font-size: 2rem;
+  }
+}
+
+/* Планшет */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .loginBg {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+  }
+  .loginContainer {
+    min-width: 522px;
+    max-width: 522px;
+    min-height: 399px;
+    height: auto;
+    box-sizing: border-box;
+    padding: 32px;
+    border-radius: 32px;
+    margin: 0 auto;
+    background: #faf3e0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .form {
+    gap: 12px;
+  }
+  .input {
+    padding: 10px 10px;
+    border-radius: 10px;
+    font-size: 1rem;
+  }
+  .loginBtn {
+    font-size: 1rem;
+    padding: 10px 0;
+    border-radius: 8px;
+  }
+  .title {
+    font-size: 2rem;
+  }
+}
+
+/* Десктоп */
+@media (min-width: 1280px) {
+  .loginBg {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+  }
+  .loginContainer {
+    min-width: 420px;
+    max-width: 420px;
+    min-height: 399px;
+    height: auto;
+    box-sizing: border-box;
+    padding: 32px;
+    border-radius: 32px;
+    margin: 0 auto;
+    background: #faf3e0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .form {
+    gap: 12px;
+  }
+  .input {
+    padding: 10px 10px;
+    border-radius: 10px;
+    font-size: 1rem;
+  }
+  .loginBtn {
+    font-size: 1rem;
+    padding: 10px 0;
+    border-radius: 8px;
+  }
+  .title {
+    font-size: 2rem;
+  }
+}

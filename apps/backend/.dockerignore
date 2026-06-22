@@ -1,0 +1,13 @@
+node_modules
+.env
+.env.*
+!.env.example
+src/temp/*
+src/upload/*
+public/avatars/*
+public/recipes/*
+public/ingredients/*
+*.log
+.git
+.gitignore
+README.md

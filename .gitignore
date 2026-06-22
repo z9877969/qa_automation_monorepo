@@ -1,0 +1,16 @@
+node_modules/
+.env
+dist/
+apps/backend/public/avatars/*
+apps/backend/public/recipes/*
+apps/backend/public/ingredients/*
+!apps/backend/public/avatars/.gitkeep
+!apps/backend/public/recipes/.gitkeep
+!apps/backend/public/ingredients/.gitkeep
+apps/backend/src/temp/*
+apps/backend/src/upload/*
+*.log
+.DS_Store
+db_json/
+CLAUDE.md
+install-docker.sh
