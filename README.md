@@ -96,8 +96,8 @@ docker compose up --build
 | Сервіс | URL |
 |--------|-----|
 | Застосунок (Frontend) | http://localhost:5173 |
-| API (Backend) | http://localhost:5000 |
-| Swagger документація | http://localhost:5000/api-docs |
+| API (Backend) | http://localhost:4040 |
+| Swagger документація | http://localhost:4040/api-docs |
 | MySQL | localhost:3307 |
 
 ---
@@ -110,7 +110,7 @@ docker compose up --build
         ├── mysql:3306      MySQL 8.0
         │     └── Автоматично виконує schema.sql + seed.sql при першому запуску
         │
-        ├── backend:5000    Express.js API
+        ├── backend:4040    Express.js API
         │     └── Чекає на готовність MySQL (healthcheck) перед стартом
         │
         └── frontend:5173   React + Vite dev server
@@ -175,26 +175,44 @@ docker compose up --build
 cp .env.example .env
 ```
 
-### Доступні змінні
+### MySQL
+
+| Змінна | За замовчуванням | Опис |
+|--------|-----------------|------|
+| `MYSQL_ROOT_PASSWORD` | `rootpassword` | Пароль root-користувача MySQL |
+| `MYSQL_USER` | `headliner` | Ім'я користувача застосунку |
+| `MYSQL_PASSWORD` | `headliner_pass` | Пароль користувача застосунку |
+| `MYSQL_DB` | `headliner_db` | Назва бази даних |
+
+> `MYSQL_USER`, `MYSQL_PASSWORD`, `MYSQL_DB` автоматично передаються і в MySQL-контейнер (для створення користувача/БД), і в бекенд (для підключення) — змінюйте їх лише в `.env`, docker-compose.yml підхопить обидва місця.
+
+### Backend
+
+| Змінна | За замовчуванням | Опис |
+|--------|-----------------|------|
+| `PORT` | `4040` | Порт HTTP-сервера всередині контейнера |
+| `APP_DOMAIN` | `http://localhost:4040` | Публічна URL бекенду — використовується для формування посилань на завантажені файли (`/api/uploads/...`) |
+| `MYSQL_HOST` | `mysql` | Хост MySQL (ім'я сервісу в Docker-мережі). **Не змінювати** при роботі в Docker |
+| `MYSQL_PORT` | `3306` | Порт MySQL всередині Docker-мережі. **Не змінювати** при роботі в Docker |
+
+### Frontend
+
+| Змінна | За замовчуванням | Опис |
+|--------|-----------------|------|
+| `VITE_API_URL` | `http://localhost:4040` | URL бекенду для HTTP-запитів з браузера |
+
+### ⚠️ Пов'язані змінні — змінювати разом
+
+При зміні порту бекенду необхідно оновити **три змінні одночасно**:
 
 ```env
-# MySQL
-MYSQL_ROOT_PASSWORD=rootpassword
-MYSQL_USER=headliner
-MYSQL_PASSWORD=headliner_pass
-MYSQL_DB=headliner_db
-
-# Backend
-PORT=5000
-MYSQL_HOST=mysql
-MYSQL_PORT=3306
-APP_DOMAIN=http://localhost:5000
-
-# Frontend
-VITE_API_URL=http://localhost:5000
+PORT=4040                          # порт сервера всередині контейнера
+APP_DOMAIN=http://localhost:4040   # має містити той самий порт — для URL файлів
+VITE_API_URL=http://localhost:4040 # має збігатися з APP_DOMAIN — для запитів фронтенду
 ```
 
-> `MYSQL_HOST` та `MYSQL_PORT` у Docker Compose вже встановлені автоматично (`mysql:3306`). Ці змінні потрібні лише при запуску бекенду поза Docker.
+Якщо `PORT` і `APP_DOMAIN` розсинхронізовані — посилання на аватари та фото рецептів будуть вести на неправильну адресу.  
+Якщо `PORT` і `VITE_API_URL` розсинхронізовані — фронтенд не зможе достукатися до API.
 
 ---
 
