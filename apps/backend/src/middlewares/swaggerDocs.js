@@ -1,12 +1,20 @@
 import express from 'express';
 import fs from 'node:fs';
 import { SWAGGER_PATH } from '../constants/index.js';
+import { getEnvVar } from '../utils/getEnvVar.js';
 import createHttpError from 'http-errors';
 import swaggerUI from 'swagger-ui-express';
+
 export const swaggerDocs = () => {
   const router = express.Router();
   try {
     const swaggerDoc = JSON.parse(fs.readFileSync(SWAGGER_PATH).toString());
+
+    const appDomain = getEnvVar('APP_DOMAIN', 'http://localhost:4040');
+    if (swaggerDoc.servers?.[0]) {
+      swaggerDoc.servers[0].url = `${appDomain}/api`;
+    }
+
     router.use(swaggerUI.serve);
     router.get('/', swaggerUI.setup(swaggerDoc));
   } catch (err) {
