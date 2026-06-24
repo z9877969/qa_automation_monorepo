@@ -7,9 +7,11 @@ export const saveFileToPublicDir = async (file, folder) => {
   const destDir = path.join(PUBLIC_DIR, folder);
   await fs.mkdir(destDir, { recursive: true });
 
+  const srcPath = path.join(TEMP_UPLOAD_DIR, file.filename);
   const destPath = path.join(destDir, file.filename);
-  await fs.rename(path.join(TEMP_UPLOAD_DIR, file.filename), destPath);
+  await fs.copyFile(srcPath, destPath);
+  await fs.unlink(srcPath);
 
-  const domain = getEnvVar('APP_DOMAIN', 'http://localhost:5000');
+  const domain = getEnvVar('APP_DOMAIN', 'http://localhost:4040');
   return `${domain}/api/uploads/${folder}/${file.filename}`;
 };
