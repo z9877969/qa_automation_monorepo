@@ -70,6 +70,10 @@ export const getAllRecipes = async ({ page = 1, perPage = 12, filter = {} }) => 
     )`);
     params.push(`%${filter.ingredient}%`);
   }
+  if (filter.title) {
+    conditions.push('r.title LIKE ?');
+    params.push(`%${filter.title}%`);
+  }
 
   const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
 
