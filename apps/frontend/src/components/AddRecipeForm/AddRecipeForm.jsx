@@ -74,11 +74,11 @@ const AddRecipeForm = () => {
   const ingredientsFromRedux = useSelector(selectIngredients);
 
   const categoryOptions = categoriesFromRedux.map(cat => ({
-    value: cat._id,
+    value: cat.id,
     label: cat.name,
   }));
   const ingredientOptions = ingredientsFromRedux.map(ing => ({
-    value: ing._id,
+    value: ing.id,
     label: ing.name,
   }));
 
@@ -129,7 +129,7 @@ const AddRecipeForm = () => {
 
       const response = await createRecipe(formData, token);
       dispatch(fetchOwnRecipes({ page: 1, limit: 12 }));
-      const createdRecipeId = response.data._id;
+      const createdRecipeId = response.data.id;
 
       toast.success('Recipe created successfully!');
       navigate(`/recipes/${createdRecipeId}`, { state: { updated: true } });
