@@ -173,7 +173,7 @@ DeleteRecipeSuccessResponse:
       example: 200
      message:
       type: string
-      example: Recipe with ID 65d65abfa7e45a0012fcd087 has been successfully deleted.
+      example: Recipe with ID 42 has been successfully deleted.
 
 UnauthorizedErrorResponse:
   type: object
@@ -341,7 +341,7 @@ components:
         owner:
           description: 'User`s autorization id'
           type: string
-          example: 685166d165ae9c02b6d54ab9
+          example: 5
         area:
           description: 'Country of origin of the recipe'
           type: string
@@ -385,7 +385,7 @@ components:
               id:
                 type: string
                 description: 'Ingredients id'
-                example: '685166d165ae9c02b6d54ab9'
+                example: 1
               measure:
                 type: string
                 description: Measurement unit or amount
@@ -427,7 +427,7 @@ components:
         owner:
           description: 'User`s autorization id'
           type: string
-          example: 685166d165ae9c02b6d54ab9
+          example: 5
         area:
           description: 'Country of origin of the recipe'
           type: string
@@ -471,7 +471,7 @@ components:
               id:
                 type: string
                 description: 'Ingredients id'
-                example: '685166d165ae9c02b6d54ab9'
+                example: 1
               measure:
                 type: string
                 description: Measurement unit or amount

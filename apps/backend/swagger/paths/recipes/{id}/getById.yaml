@@ -9,8 +9,8 @@ parameters:
     name: recipeId
     required: true
     schema:
-      type: string
-      example: '65ca67e7ae7f10c88b598384'
+      type: integer
+      example: 1
     description: Unique recipe identifier
 responses:
   200:
@@ -29,7 +29,7 @@ responses:
               example: 200
             message:
               type: string
-              example: Successfully found recipe with id 6462a8f74c3d0ddd28897fcd!
+              example: Successfully found recipe with id 1!
             data:
               type: object
               properties:

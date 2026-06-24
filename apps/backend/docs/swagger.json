@@ -113,7 +113,7 @@
                 "description": "HTTP-only cookies for refreshToken and sessionId will be set.",
                 "schema": {
                   "type": "string",
-                  "example": "refreshToken=wQgb97oZjc6E2rjGYP8WZj6cFPwSjZV58tV3QVnA; sessionId=j%3A%22684bd6c9c89150805aea7579%22"
+                  "example": "refreshToken=wQgb97oZjc6E2rjGYP8WZj6cFPwSjZV58tV3QVnA; sessionId=5"
                 }
               }
             },
@@ -426,8 +426,8 @@
             "required": true,
             "description": "The ID of the recipe to add to favorites",
             "schema": {
-              "type": "string",
-              "example": "685166d165ae9c02b6d54ab9"
+              "type": "integer",
+              "example": 1
             }
           }
         ],
@@ -468,8 +468,8 @@
             "name": "recipeId",
             "required": true,
             "schema": {
-              "type": "string",
-              "example": "685166d165ae9c02b6d54ab9"
+              "type": "integer",
+              "example": 1
             }
           }
         ],
@@ -558,8 +558,8 @@
             "name": "recipeId",
             "required": true,
             "schema": {
-              "type": "string",
-              "example": "65ca67e7ae7f10c88b598384"
+              "type": "integer",
+              "example": 1
             },
             "description": "Unique recipe identifier"
           }
@@ -583,7 +583,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Successfully found recipe with id 6462a8f74c3d0ddd28897fcd!"
+                      "example": "Successfully found recipe with id 1!"
                     },
                     "data": {
                       "type": "object",
@@ -692,8 +692,8 @@
             "required": true,
             "description": "The ID of the recipe to delete",
             "schema": {
-              "type": "string",
-              "example": "64f6a226e1b2c4d7f3b8c1d5"
+              "type": "integer",
+              "example": 1
             }
           }
         ],
@@ -1201,7 +1201,7 @@
           "owner": {
             "description": "User`s autorization id",
             "type": "string",
-            "example": "685166d165ae9c02b6d54ab9"
+            "example": 5
           },
           "area": {
             "description": "Country of origin of the recipe",
@@ -1253,7 +1253,7 @@
                 "id": {
                   "type": "string",
                   "description": "Ingredients id",
-                  "example": "685166d165ae9c02b6d54ab9"
+                  "example": 1
                 },
                 "measure": {
                   "type": "string",
@@ -1308,7 +1308,7 @@
           "owner": {
             "description": "User`s autorization id",
             "type": "string",
-            "example": "685166d165ae9c02b6d54ab9"
+            "example": 5
           },
           "area": {
             "description": "Country of origin of the recipe",
@@ -1360,7 +1360,7 @@
                 "id": {
                   "type": "string",
                   "description": "Ingredients id",
-                  "example": "685166d165ae9c02b6d54ab9"
+                  "example": 1
                 },
                 "measure": {
                   "type": "string",
@@ -1505,7 +1505,7 @@
           },
           "message": {
             "type": "string",
-            "example": "Recipe with ID 65d65abfa7e45a0012fcd087 has been successfully deleted."
+            "example": "Recipe with ID 42 has been successfully deleted."
           }
         }
       }
