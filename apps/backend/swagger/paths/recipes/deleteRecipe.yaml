@@ -11,8 +11,8 @@ parameters:
     required: true
     description: The ID of the recipe to delete
     schema:
-      type: string
-      example: 64f6a226e1b2c4d7f3b8c1d5
+      type: integer
+      example: 1
 responses:
   '200':
     description: Recipe successfully deleted

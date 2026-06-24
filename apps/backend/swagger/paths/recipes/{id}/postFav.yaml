@@ -11,8 +11,8 @@ parameters:
     required: true
     description: The ID of the recipe to add to favorites
     schema:
-      type: string
-      example: '685166d165ae9c02b6d54ab9'
+      type: integer
+      example: 1
 responses:
   '200':
     description: Recipe successfully added to favorites

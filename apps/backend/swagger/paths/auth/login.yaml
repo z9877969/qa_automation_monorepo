@@ -19,7 +19,7 @@ responses:
         description: HTTP-only cookies for refreshToken and sessionId will be set.
         schema:
           type: string
-          example: refreshToken=wQgb97oZjc6E2rjGYP8WZj6cFPwSjZV58tV3QVnA; sessionId=j%3A%22684bd6c9c89150805aea7579%22
+          example: refreshToken=wQgb97oZjc6E2rjGYP8WZj6cFPwSjZV58tV3QVnA; sessionId=5
     content:
       application/json:
         schema:
