@@ -9,7 +9,7 @@ export const parseFilterParams = (query) => {
     filter.ingredient = ingredient;
   }
   if (search) {
-    filter.title = { $regex: search, $options: 'i' };
+    filter.title = search;
   }
   return filter;
 };
