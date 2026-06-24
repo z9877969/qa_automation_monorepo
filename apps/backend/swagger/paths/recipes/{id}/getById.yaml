@@ -33,9 +33,9 @@ responses:
             data:
               type: object
               properties:
-                _id:
-                  type: string
-                  example: "6462a8f74c3d0ddd28897fcd"
+                id:
+                  type: integer
+                  example: 1
                 title:
                   type: string
                   example: Borscht
@@ -66,14 +66,11 @@ responses:
                     type: object
                     properties:
                       id:
-                        type: object
-                        properties:
-                          _id:
-                            type: string
-                            example: ingredientId
-                          name:
-                            type: string
-                            example: Beetroot
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: Beetroot
                       measure:
                         type: string
                         example: 200 g

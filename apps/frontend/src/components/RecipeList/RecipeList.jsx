@@ -7,7 +7,7 @@ const RecipeList = ({ recipes = [], type, onRemove }) => {
       {recipes.length === 0 && <p>No recipes found.</p>}
       {recipes.map(recipe => (
         <RecipeCard
-          key={recipe._id}
+          key={recipe.id}
           recipe={recipe}
           type={type}
           onRemove={onRemove}

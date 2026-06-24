@@ -23,11 +23,11 @@ const RecipeDetails = ({ recipe, allIngredients = [] }) => {
   } = recipe;
 
   const resolveIngredientName = id => {
-    const found = allIngredients.find(ing => ing._id === id);
+    const found = allIngredients.find(ing => ing.id === id);
     return found?.name || 'Unknown ingredient';
   };
   const favoriteIds = useSelector(selectFavoriteRecipeIds);
-  const isFavorite = favoriteIds.includes(recipe._id);
+  const isFavorite = favoriteIds.includes(recipe.id);
   const [isFavLoading, setIsFavLoading] = useState(false);
 
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const RecipeDetails = ({ recipe, allIngredients = [] }) => {
     setIsFavLoading(true);
 
     try {
-      const resultAction = await dispatch(toggleFavorite(recipe._id));
+      const resultAction = await dispatch(toggleFavorite(recipe.id));
 
       if (toggleFavorite.rejected.match(resultAction)) {
         toast.error('Failed to update favorites. Please try again.');

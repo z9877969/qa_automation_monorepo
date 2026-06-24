@@ -81,9 +81,9 @@ CurrentUserResponse:
     data:
       type: object
       properties:
-        _id:
-          type: string
-          example: 68625286ccc2346b9b5c58a1
+        id:
+          type: integer
+          example: 1
         name:
           type: string
           example: test11
@@ -93,8 +93,8 @@ CurrentUserResponse:
         favorites:
           type: array
           items:
-            type: string
-            example: 65e4decdd286b30065d54af9
+            type: integer
+            example: 42
           example: []
         createdAt:
           type: string
@@ -123,9 +123,9 @@ CategoriesResponse:
       items:
         type: object
         properties:
-          _id:
-            type: string
-            example: 6462a6cd4c3d0ddd28897f8a
+          id:
+            type: integer
+            example: 1
           name:
             type: string
             example: Seafood
@@ -148,9 +148,9 @@ IngredientsResponse:
       items:
         type: object
         properties:
-          _id:
-            type: string
-            example: 665c61ff89123b001c5c5678
+          id:
+            type: integer
+            example: 1
           name:
             type: string
             example: Egg
@@ -219,9 +219,9 @@ RegisterSuccessResponse:
     data:
       type: object
       properties:
-        _id:
-          type: string
-          example: 68625286ccc2346b9b5c58a1
+        id:
+          type: integer
+          example: 1
         name:
           type: string
           example: test11
@@ -231,7 +231,7 @@ RegisterSuccessResponse:
         favorites:
           type: array
           items:
-            type: string
+            type: integer
           example: []
         createdAt:
           type: string
@@ -314,7 +314,7 @@ components:
     Recipes:
       type: object
       required:
-        - _id
+        - id
         - title
         - category
         - owner
@@ -325,10 +325,10 @@ components:
         - createdAt
         - updatedAt
       properties:
-        _id:
+        id:
           description: "Recipe's id"
-          type: string
-          example: 685166d165ae9c02b6d54ab9
+          type: integer
+          example: 1
         title:
           description: "Recipe's name"
           type: string
@@ -411,10 +411,10 @@ components:
         - time
         - ingredients
       properties:
-        _id:
+        id:
           description: "Recipe's id"
-          type: string
-          example: 685166d165ae9c02b6d54ab9
+          type: integer
+          example: 1
         title:
           description: "Recipe's name"
           type: string

@@ -17,12 +17,12 @@ const RecipeCard = ({ recipe, type, onRemove }) => {
 
   const isLoggedIn = useSelector(selectIsAuthenticated);
   const favoriteIds = useSelector(selectFavoriteRecipeIds);
-  const isFavorite = favoriteIds.includes(recipe._id);
+  const isFavorite = favoriteIds.includes(recipe.id);
   const [isFavoriteLoading, setIsFavoriteLoading] = useState(false);
   const calories = recipe.calories;
 
   const handleLoadMore = () => {
-    navigate(`/recipes/${recipe._id}`);
+    navigate(`/recipes/${recipe.id}`);
   };
 
   const handleFavorite = async () => {
@@ -32,7 +32,7 @@ const RecipeCard = ({ recipe, type, onRemove }) => {
     }
     setIsFavoriteLoading(true);
     try {
-      const resultAction = await dispatch(toggleFavorite(recipe._id));
+      const resultAction = await dispatch(toggleFavorite(recipe.id));
 
       if (toggleFavorite.rejected.match(resultAction)) {
         toast.error('Failed to update favorites. Please try again.');
@@ -90,7 +90,7 @@ const RecipeCard = ({ recipe, type, onRemove }) => {
           {type === 'favorites' ? (
             <button
               className={`${styles.saveBtn} ${styles.favBtn}`}
-              onClick={() => onRemove(recipe._id)}
+              onClick={() => onRemove(recipe.id)}
               aria-label="Remove from favorites"
             >
               <svg className={styles.iconFavorite}>
