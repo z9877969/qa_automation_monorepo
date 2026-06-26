@@ -127,9 +127,9 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
       })
       .addCase(toggleFavorite.fulfilled, (state, action) => {
-        //додавання рецепта в улюблені
         const { recipeId, action: act } = action.payload;
         if (!state.user) return;
+        if (!state.user.favorites) state.user.favorites = [];
 
         if (act === 'add') {
           if (!state.user.favorites.includes(recipeId)) {
