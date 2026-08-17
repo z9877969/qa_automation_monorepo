@@ -205,9 +205,15 @@ const AddRecipeForm = () => {
                     type="text"
                     name="title"
                     placeholder="Enter the name of your recipe"
+                    data-testid="recipe-title-input"
                   />
                   {errors.title && touched.title && (
-                    <div className={css.errorMessage}>{errors.title}</div>
+                    <div
+                      className={css.errorMessage}
+                      data-testid="error-message"
+                    >
+                      {errors.title}
+                    </div>
                   )}
                 </label>
 
@@ -222,9 +228,15 @@ const AddRecipeForm = () => {
                     }`}
                     name="description"
                     placeholder="Enter a brief description of your recipe"
+                    data-testid="recipe-description-input"
                   />
                   {errors.description && touched.description && (
-                    <div className={css.errorMessage}>{errors.description}</div>
+                    <div
+                      className={css.errorMessage}
+                      data-testid="error-message"
+                    >
+                      {errors.description}
+                    </div>
                   )}
                 </label>
 
@@ -239,9 +251,15 @@ const AddRecipeForm = () => {
                     type="number"
                     name="time"
                     placeholder="10"
+                    data-testid="cooking-time-input"
                   />
                   {errors.time && touched.time && (
-                    <div className={css.errorMessage}>{errors.time}</div>
+                    <div
+                      className={css.errorMessage}
+                      data-testid="error-message"
+                    >
+                      {errors.time}
+                    </div>
                   )}
                 </label>
 
@@ -257,13 +275,19 @@ const AddRecipeForm = () => {
                       type="number"
                       name="calories"
                       placeholder="150"
+                      data-testid="calories-input"
                     />
                     {errors.calories && touched.calories && (
-                      <div className={css.errorMessage}>{errors.calories}</div>
+                      <div
+                        className={css.errorMessage}
+                        data-testid="error-message"
+                      >
+                        {errors.calories}
+                      </div>
                     )}
                   </label>
 
-                  <label className={`${css.label} ${css.category}`}>
+                  <label className={`${css.label} ${css.category}`} data-testid="category-dropdown">
                     <span className={css.labelTitle}>Category</span>
                     <Select
                       className={css.reactSelect}
@@ -279,16 +303,25 @@ const AddRecipeForm = () => {
                       styles={selectStylesDefault(
                         Boolean(errors.category && touched.category)
                       )}
+                      
                     />
                     {errors.category && touched.category && (
-                      <div className={css.errorMessage}>{errors.category}</div>
+                      <div
+                        className={css.errorMessage}
+                        data-testid="error-message"
+                      >
+                        {errors.category}
+                      </div>
                     )}
                   </label>
                 </div>
 
                 <h3 className={css.sectionIngredients}>Ingredients</h3>
                 <div className={css.rowGroupIngredients}>
-                  <label className={css.ingredientsName}>
+                  <label
+                    className={css.ingredientsName}
+                    data-testid="ingredients-dropdown"
+                  >
                     <span className={css.labelTitle}>Name</span>
                     <Select
                       className={css.reactSelect}
@@ -304,7 +337,10 @@ const AddRecipeForm = () => {
                       )}
                     />
                     {errors.newIngredient && touched.newIngredient && (
-                      <div className={css.errorMessage}>
+                      <div
+                        className={css.errorMessage}
+                        data-testid="error-message"
+                      >
                         {errors.newIngredient.value || 'Required'}
                       </div>
                     )}
@@ -323,10 +359,14 @@ const AddRecipeForm = () => {
                         type="text"
                         name="newIngredientMeasure"
                         placeholder="100g"
+                        data-testid="ingredients-amount-input"
                       />
                       {errors.newIngredientMeasure &&
                         touched.newIngredientMeasure && (
-                          <div className={css.errorMessage}>
+                          <div
+                            className={css.errorMessage}
+                            data-testid="error-message"
+                          >
                             {errors.newIngredientMeasure}
                           </div>
                         )}
@@ -418,9 +458,13 @@ const AddRecipeForm = () => {
                     }`}
                     name="instructions"
                     placeholder="Enter the step by step instructions for your recipe"
+                    data-testid="instructions-input"
                   />
                   {errors.instructions && touched.instructions && (
-                    <div className={css.errorMessage}>
+                    <div
+                      className={css.errorMessage}
+                      data-testid="error-message"
+                    >
                       {errors.instructions}
                     </div>
                   )}
