@@ -19,6 +19,7 @@ import { upload } from '../middlewares/multer.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { authenticate } from '../middlewares/authenticate.js';
+import { parseIngredients } from '../middlewares/parseIngredients.js';
 import { deleteOwnRecipeController } from '../controllers/recipes.js';
 
 const router = express.Router();
@@ -28,6 +29,7 @@ router.post(
   '/',
   authenticate,
   upload.single('thumb'),
+  parseIngredients,
   validateBody(createRecipeSchema),
   ctrlWrapper(createRecipeController),
 );

@@ -405,16 +405,11 @@ components:
       required:
         - title
         - category
-        - owner
         - instructions
         - description
         - time
         - ingredients
       properties:
-        id:
-          description: "Recipe's id"
-          type: integer
-          example: 1
         title:
           description: "Recipe's name"
           type: string
@@ -424,10 +419,6 @@ components:
           description: "Recipe's category"
           type: string
           example: 'Breakfest'
-        owner:
-          description: 'User`s autorization id'
-          type: string
-          example: 5
         area:
           description: 'Country of origin of the recipe'
           type: string

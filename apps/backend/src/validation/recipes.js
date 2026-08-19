@@ -8,6 +8,7 @@ export const createRecipeSchema = Joi.object({
   area: Joi.string().max(100).optional(),
   calories: Joi.number().min(1).max(10000).optional(),
   instructions: Joi.string().max(1200).required(),
+  thumb: Joi.any().strip().optional(),
   ingredients: Joi.array()
     .items(
       Joi.object({
