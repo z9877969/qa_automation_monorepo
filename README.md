@@ -300,3 +300,4 @@ node apps/backend/db/json-to-seed.mjs   # генерує новий seed.sql
 docker compose down -v                   # скидає volume
 docker compose up --build                # запускає з новими даними
 ```
+ 
