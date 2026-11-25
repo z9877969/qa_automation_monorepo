@@ -53,24 +53,14 @@ test('Зменшувати час приготування з 90 хвилин к
 
 // спочатку виконуємо генерацію, а потім перевіряємо умову
 test('Згенерувати випадкову назву рецепта і повторювати генерацію, доки вона не буде коротшою за 20 символів', async ({ page }) => {
-    await page.goto('http://localhost:5173/');
-    const recipeTitles = page.locator('[class^="RecipeCard-module_title_bhfbO"]');
-
-    const titles = [];
-    for (let i = 0; i < 12; i++) {
-        const title = await recipeTitles.nth(i).textContent();
-        titles.push(title);
-    }
-    console.log(titles);
-
+    const recipeNames = ['Egyptian Fatteh', 'Madeira Cake', 'Strawberry Rhubarb Pie', 
+        'Tunisian Orange Cake', 'Cevapi Sausages', 'Fennel Dauphinoise'];
+    
     let randomTitle;
     do {
-        // retrieve an element from the array
-        // Math.floor rounds a number DOWN to the nearest integer
-        // Math.random(generates a random decimal]
-        // titles.lingth is an actual number of elements in the array
-        randomTitle = titles[Math.floor(Math.random() * titles.length)];
-    } while (randomTitle.length >= 20);
+        randomTitle = recipeNames[Math.floor(Math.random() * recipeNames.length)];
+    } while (recipeNames.length >= 20);
+
     console.log(randomTitle);
 });
 
@@ -103,3 +93,8 @@ test('пошук елемента Рамен в наборі', async({page}) => 
     // 9 із 11
     // необхідно додати required до name/title моделі рецепту у бекенді 
 })
+
+        // retrieve an element from the array
+        // Math.floor rounds a number DOWN to the nearest integer
+        // Math.random(generates a random decimal]
+        // titles.lingth is an actual number of elements in the array
