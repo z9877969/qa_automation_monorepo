@@ -13,3 +13,5 @@ apps/backend/src/upload/*
 .DS_Store
 CLAUDE.md
 install-docker.sh
+qa-automation/test-results/*
+playwright-report/
