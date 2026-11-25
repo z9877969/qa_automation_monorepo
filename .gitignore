@@ -14,3 +14,4 @@ apps/backend/src/upload/*
 CLAUDE.md
 install-docker.sh
 qa-automation/test-results/*
+playwright-report/
