@@ -193,3 +193,113 @@ test('get to the Corned Beef and Cabbage recipe\'s btn', async ({ page }) => {
 //      форма з унікальними полями -> звуження не потрібе
 // http://127.0.0.1:5173/auth/login ->
 //      форма з унікальними полями, але з однаковими сусідами ->  потрібне звуження за індексом чи змістом
+
+// DevTools
+
+// Console
+//
+// > document.querySelector('#email')
+// <input id=​"email" placeholder=​"email@gmail.com" class=​"LoginPage-module_input_A0yfe" type=​"email" value name=​"email">​
+//
+// $('#email') - 1st element (can be other elements)
+// $$('article') - all elements (array)
+//
+// >$('#email')
+// <input id=​"email" placeholder=​"email@gmail.com" class=​"LoginPage-module_input_A0yfe" type=​"email" value name=​"email">​
+//
+// > $$('#email').length
+// 1 -> means #email is the unique locator
+
+// сценарій «неправильний пароль»
+//
+// Помилку входу застосунок показує спливним сповіщенням:
+// $$('[role="alert"]')
+// [div#4.Toastify__toast.Toastify__toast-theme--light.Toastify__toast--error]
+// -> 
+//      CSS-селектор: [role="alert"]
+//      Крок процесу: після натискання кнопки входу (Log in) з існуючим email і неправильним паролем.
+//      Умова появи: з'являється після сабміту форми з невалідним паролем.
+//
+// після відкриття сторінки:
+// $$('[role="alert"]')
+// [div#6.Toastify__toast.Toastify__toast-theme--light.Toastify__toast--success]
+
+// Практика
+// 
+// Після лоуду http://127.0.0.1:5173/ та перевірки Console у звичайному режимі Chrome 
+// було виявлено повідомлення READ - Host validation failed та Host is not supported. 
+// Після повторної перевірки в режимі інкогніто ці повідомлення зникли. 
+// 
+// Далі на сторінці http://127.0.0.1:5173/auth/login було введено goit@gmail.com | 
+// Foodies2025! та виконано успішну авторизацію. Після входу відбувся перехід на головну 
+// сторінку http://127.0.0.1:5173/.
+// У вкладці Application → Local Storage → http://127.0.0.1:5173 виявлено два токени:
+//      persist:auth	{"token":"\"Dytzkw0KbskCpNPkAB23INEAtU9Ovv1fbanP1ljd\"","_persist":"{\"version\":-1,\"rehydrated\":true}"}
+//      accessToken	Dytzkw0KbskCpNPkAB23INEAtU9Ovv1fbanP1ljd
+// 
+// Після перезавантаження сторінки обидва токени залишилися в Local Storage.
+// 
+// Виконано повторний перехід за адресою http://127.0.0.1:5173/auth/login без виходу з 
+// аккаунту. Замість відображення форми авторизації застосунок автоматично перенаправив 
+// користувача на головну сторінку http://127.0.0.1:5173/.
+//
+// Після Logout значення persist:auth змінилося: {
+//   "token": "\"токен_користувача\"", "_persist": "{\"version\":-1,\"rehydrated\":true}"}
+
+// Практика
+//
+// Correct email n password
+// Name 
+//      login
+// Headers
+//      Request URL http://localhost:4040/api/auth/login
+//      Status code 200
+// Timing
+//      Total Duration: 264.69 ms
+// Response
+//      {
+//          "status": 200,
+//          "message": "Successfully logged in an user!",
+//          "data": {
+//                "accessToken": "Al4D4ZENn7Vh6QrQwQw5VTkTFtSvEySnXAEPFNqo"
+//           }
+//      }
+//
+// Correct email n incorrect passwrod
+// Name 
+//      login
+// Headers
+//      Request URL http://localhost:4040/api/auth/login
+//      Status code 401 Unauthorized
+// Timing
+//      Total Duration: 159.66 ms
+// Response
+//      {"status":401,"message":"UnauthorizedError","data":{"message":"Unauthorized"}}
+
+// Практика
+// 
+// http://127.0.0.1:5173/ 
+//      Ctrl+F: articles -> no hidden css codes
+//      Search recipes: Pizza
+//           Ctrl+F: no articles
+//           Ctrl+F: Search Results... directs toward:
+//              <div>
+//                  <h1 class="MainPage-module_pageTitle_jUyRP">Search Results for “Pizza”</h1>
+//                  <div class="MainPage-module_filtersAndCountWrapper_SAZ4S">
+//                      <p>Sorry, no recipes match your search.</p>
+//                      <div class="Filters-module_filtersContainer_GO85i">
+//                          <button type="button" class="Filters-module_filtersLinkBtn_S4V6b">
+//                              <span class="Filters-module_filterText_W6EFm">Filters</span>
+//                              <svg class="Filters-module_filterIcon_5jlAm">
+//                                  <use href="/src/assets/icon/sprite.svg#icon-filters"></use>
+//                              </svg>
+//                          </button>
+//                      </div>
+//                  </div>
+//              <div>
+// 
+// this element appears only when
+//      search results found no requested dish
+//      all recipe cards will be deleted
+// it likely occurs due to if...else conditional js code to fetch data (not css code) written 
+// on the homepage; in other words, "Елемент є в DOM, але прихований"
