@@ -1,3 +1,5 @@
+// HTML
+
 // Table
 // Email field -> will use id="email"
 //      priority: no data-testid, id="email", name="email", ('form > input').second(), 
@@ -44,3 +46,150 @@
 //      second article using XPath: '(//article)[2]'
 // найближчий стабільний предок: div in <div class="RecipeList-module_container_fPdlM">
 //      e.g., 'div > article:nth-of-type(2) > button'
+
+// DOM
+
+import { test, expect } from '@playwright/test';
+
+// <form class="SearchForm-module_searchWrapper_H-rV6">
+//      <div class="SearchForm-module_inputGroup_0wiI8">
+//          <input data-testid="Search input" placeholder="Search recipes" class="SearchForm-module_searchInput_LwNfg " type="text" value="">
+//      </div>
+//      <button type="submit" data-testid="Search button" class="SearchForm-module_searchButton_En06w">Search</button>
+// </form>
+//
+// <div class="RecipeList-module_container_fPdlM">
+//      <article class="RecipeCard-module_card_uHg1E">
+//          <img alt="Moussaka" loading="lazy" class="RecipeCard-module_image_WRR0r" src="https://ftp.goit.study/img/so-yummy/preview/Moussaka.jpg">
+//          <div class="RecipeCard-module_content_wLwa6">
+//              <div class="RecipeCard-module_headerRow_eNZ5s">
+//                  <p class="RecipeCard-module_title_bhfbO" data-testid="Recipe title">
+//                      Moussaka
+//                  </p>
+//                  <div data-testid="Recipe timebox"></div>
+//              </div>
+//              <p data-testid="Recipe description">...</p>
+//              <div class="RecipeCard-module_buttons_Zb0Vl">
+//                  <button class="RecipeCard-module_learnMoreBtn_EAXRI">Learn more</button>
+//                  <button class="RecipeCard-module_saveBtn_3MvCb " data-testid="Save recipe button" data-action="un-selected" aria-label="Save recipe">...</button>
+//              </div>
+//          </div>
+//      </article>
+//
+// поле пошуку зверху сторінки: data-testid="Search input"
+//      кількість однакових сусідів: 0
+//      найближчий унікальний предок: form
+//      кількість рівнів вкладеності: 2 (form > div > input)
+
+// назву рецепта всередині картки: data-testid="Recipe title"
+//      кількість однакових сусідів: 0
+//      найближчий унікальний предок: 
+//          article (якщо тест охоплює всі тайтли всіх карток)
+//          немає (якщо тест охоплює конкретний тайтл)
+//      кількість рівнів вкладеності: 3 (article > div > div > p)
+// кнопку збереження: data-testid="Save recipe button"
+//      кількість однакових сусідів: 1
+//      найближчий унікальний предок: article (якщо тест охоплює всі кнопки всіх карток)
+//      кількість рівнів вкладеності: 3 (article > div > div > button)
+//
+// кількість однакових сусідів - із таким самим тегом на тому самому рівні
+// найближчий унікальний предок - найближчий батьківський елемент, який дозволяє однозначно ідентифікувати потрібний елемент
+// кількість рівнів вкладеності - скільки рівнів DOM відділяє елемент від його предка
+
+// 	.menu .item 	будь-якого нащадка .menu, на будь-якій глибині
+//  .menu > .item   лише прямих дітей .menu
+//  h2 + span       наступний сусідній елемент одразу після h2
+//  h2 ~ span       усі сусідні елементи після h2, не лише перший
+
+// console
+//
+// .menu .button
+// > document.querySelectorAll('.Layout-module_layout_8wEpC .RegisterPage-module_registerBtn_-X3zL')
+// NodeList [button.RegisterPage-module_registerBtn_-X3zL]
+// 
+// form > button
+// > document.querySelectorAll('.RegisterPage-module_form_KoD3l > .RegisterPage-module_registerBtn_-X3zL')
+// NodeList [button.RegisterPage-module_registerBtn_-X3zL]
+// 
+// p + form
+// > document.querySelectorAll('p + form')
+// NodeList [form.RegisterPage-module_form_KoD3l]
+// 
+// label ~ input
+// document.querySelectorAll('label ~ input')
+// NodeList(2) [input#name.RegisterPage-module_input_QqJZ-, input#email.RegisterPage-module_input_QqJZ-]
+//
+// .png screenshot is available in the data-testid.html
+
+test('get the form\'s button', async ({ page }) => {
+    await page.goto('http://localhost:5173/auth/register');
+    await page.locator('.RegisterPage-module_form_KoD3l .RegisterPage-module_registerBtn_-X3zL').focus();
+    // keyboard focus() on the btn
+    await page.keyboard.press('Enter');
+});
+
+// не «перший», а «той, що з конкретним змістом»
+// три кроки: контейнер, фільтр за змістом, ціль усередині
+
+// клікнути однакову й без унікальних атрибутів кнопку видалення рецепта «Плов»
+//
+//     await page
+//         .getByRole('article')
+//         .filter({hasText: 'Плов' })
+//         .getByRole('button', { name: 'Видалити' })
+
+test('get to the Corned Beef and Cabbage recipe\'s btn', async ({ page }) => {
+    await page.goto('http://localhost:5173/');
+    await page
+        .getByRole('article')
+        // унікальність береться не з атрибута самого предка, а з тексту одного з його нащадків
+        .filter({hasText: 'Corned Beef and Cabbage' })
+        .getByRole('button', { name: 'Learn more' })
+        .click();
+});
+
+// document.querySelectorAll('article button')
+// NodeList(24) [
+//     button.RecipeCard-module_learnMoreBtn_EAXRI, 
+//     button.RecipeCard-module_saveBtn_3MvCb, 
+//     button.RecipeCard-module_learnMoreBtn_EAXRI, 
+//     button.RecipeCard-module_saveBtn_3MvCb, 
+//     button.RecipeCard-module_learnMoreBtn_EAXRI, 
+//     button.RecipeCard-module_saveBtn_3MvCb, 
+//     button.RecipeCard-module_learnMoreBtn_EAXRI, 
+//     button.RecipeCard-module_saveBtn_3MvCb, 
+//     button.RecipeCard-module_learnMoreBtn_EAXRI, 
+//     button.RecipeCard-module_saveBtn_3MvCb, 
+//     button.RecipeCard-module_learnMoreBtn_EAXRI, 
+//     button.RecipeCard-module_saveBtn_3MvCb, 
+//     button.RecipeCard-module_learnMoreBtn_EAXRI, 
+//     button.RecipeCard-module_saveBtn_3MvCb, 
+//     button.RecipeCard-module_learnMoreBtn_EAXRI, 
+//     button.RecipeCard-module_saveBtn_3MvCb, 
+//     button.RecipeCard-module_learnMoreBtn_EAXRI, 
+//     button.RecipeCard-module_saveBtn_3MvCb, 
+//     button.RecipeCard-module_learnMoreBtn_EAXRI, 
+//     button.RecipeCard-module_saveBtn_3MvCb, 
+//     button.RecipeCard-module_learnMoreBtn_EAXRI, 
+//     button.RecipeCard-module_saveBtn_3MvCb, 
+//     button.RecipeCard-module_learnMoreBtn_EAXRI, 
+//     button.RecipeCard-module_saveBtn_3MvCb]
+// 
+// <div class="RecipeCard-module_buttons_Zb0Vl">
+//      <button class="RecipeCard-module_learnMoreBtn_EAXRI">Learn more</button>
+//
+// чому для дії «learn more конкретний рецепт» коректний саме фільтр за змістом:
+//      - all learn more buttons has the same class button.RecipeCard-module_saveBtn_3MvCb
+//      - all learn more buttons has no unique attribute
+//      - could use .nth(3) between .locator('article') and .getByRole('button', { name: 'Learn more' }), but it might become unreliable if the order is changed
+
+// яка форма і яка стратегія локатора з неї випливає
+//
+// http://127.0.0.1:5173/ 
+//      список однакових сусідів: article -> потрібне звуження за індексом чи змістом для деяких тестів
+//      cкладена RecipeCard -> потрібне звуження переважно за змістом
+//      з динамічним вмістом -> локатор за індексом ненадійний для деяких тестів
+// http://127.0.0.1:5173/auth/register ->
+//      форма з унікальними полями -> звуження не потрібе
+// http://127.0.0.1:5173/auth/login ->
+//      форма з унікальними полями, але з однаковими сусідами ->  потрібне звуження за індексом чи змістом
